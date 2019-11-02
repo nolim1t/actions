@@ -10,7 +10,7 @@ LABEL "com.github.actions.icon"="server"
 LABEL "com.github.actions.color"="orange"
 
 RUN apt-get update && apt-get install -y \
-    openssh-client tor && \
+    openssh-client netcat tor && \
     rm -Rf /var/lib/apt/lists/*
 
 ADD entrypoint.sh /entrypoint.sh
