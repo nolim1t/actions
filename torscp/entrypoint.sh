@@ -25,6 +25,8 @@ chmod 600 "$SSH_PATH/deploy_key"
 eval $(ssh-agent)
 ssh-add "$SSH_PATH/deploy_key"
 
+echo "Wait about 15 seconds for TOR to bootstrap"
+
 check_connection() {
   if nc -vz localhost 9050 2>/dev/null; then
       ONLINE=0
