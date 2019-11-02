@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Environment variables (PRIVATE_KEY, SRC, DEST)
 
