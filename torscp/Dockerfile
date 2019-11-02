@@ -9,4 +9,11 @@ LABEL "com.github.actions.description"="Deploy a directory to SCP over TOR"
 LABEL "com.github.actions.icon"="server"
 LABEL "com.github.actions.color"="orange"
 
+RUN apt-get update && apt-get install -y \
+    openssh-client tor && \
+    rm -Rf /var/lib/apt/lists/*
+
+ADD entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
