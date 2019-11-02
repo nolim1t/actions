@@ -25,5 +25,32 @@ chmod 600 "$SSH_PATH/deploy_key"
 eval $(ssh-agent)
 ssh-add "$SSH_PATH/deploy_key"
 
+check_connection() {
+  if nc -vz localhost 9050 2>/dev/null; then
+      ONLINE=0
+  else
+      ONLINE=1
+  fi
+}
+
+ONLINE=1
+COUNT=0
+
+# Check tor connection for 30 seconds
+while [[ $ONLINE -eq 1 ]] && [ $COUNT -lt 60 ]
+do
+    echo "Checking tor connection"
+    check_connection
+    COUNT=$((COUNT + 1))
+    sleep 1
+done
+
 # Lets copy this
-scp -r $SRC $DEST
+if [[ $ONLINE == 0 ]]; then
+  echo "We are online"
+  scp -r $SRC $DEST
+  return 0
+else
+  echo "Can't connect to tor after 60 seconds"
+  return 1
+fi
