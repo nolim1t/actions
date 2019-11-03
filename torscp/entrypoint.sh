@@ -8,6 +8,8 @@ set -e
 apk add tor
 # Try to install netcat again
 apk add netcat-openbsd
+# try to install openrc again
+apk add openrc
 
 mkdir -p /etc/tor
 echo "SOCKSPort 9050" > /etc/tor/torrc
