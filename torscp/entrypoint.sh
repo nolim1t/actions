@@ -9,12 +9,15 @@ apk add tor
 # Try to install netcat again
 apk add netcat-openbsd
 
+mkdir -p /etc/tor
+echo "SOCKSPort 9050" > /etc/tor/torrc
+echo "Log debug file /var/log/tor/debug.log" >> /etc/torrc
+echo "DataDirectory /var/lib/tor" >> /etc/torrc
+echo "ControlPort 9051" >> /etc/torrc
+echo "CookieAuthentication 1" >> /etc/torrc
+
 if [[ -f /etc/init.d/tor ]]; then
   /etc/init.d/tor start
-  echo "Starting TOR"
-else
-  echo "Failed to start tor"
-  return 1
 fi
 
 
