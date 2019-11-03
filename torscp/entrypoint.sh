@@ -15,6 +15,7 @@ echo "StrictHostKeyChecking=no" >> "$SSH_PATH/config"
 # Use netcat to enterface with TOR
 echo "Host *.onion" >> "$SSH_PATH/config"
 echo "    ProxyCommand /usr/bin/nc -x localhost:9050 %h %p" >> "$SSH_PATH/config"
+cat $SSH_PATH/config
 
 echo "$PRIVATE_KEY" > "$SSH_PATH/deploy_key"
 
@@ -26,7 +27,7 @@ eval $(ssh-agent)
 ssh-add "$SSH_PATH/deploy_key"
 
 echo "Wait about 20 seconds for TOR to bootstrap"
-sleep 20 
+sleep 20
 
 echo "Show tor directory [DEBUG]"
 ls /var/log/tor
@@ -54,8 +55,8 @@ done
 
 # Lets copy this
 if [[ $ONLINE == 0 ]]; then
-  echo "We are online"
-  scp -r $SRC $DEST
+  echo "We are online; lets start the SCP stuff"
+  scp -o "ProxyCommand /usr/bin/nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -r $SRC $DEST
   return 0
 else
   echo "Can't connect to tor after 60 seconds"
