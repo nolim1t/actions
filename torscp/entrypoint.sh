@@ -49,9 +49,6 @@ ssh-add "$SSH_PATH/deploy_key"
 echo "Wait about 20 seconds for TOR to bootstrap"
 sleep 20
 
-echo "Show tor directory [DEBUG]"
-ls /var/log/tor
-
 
 check_connection() {
   if nc -vz localhost 9050 2>/dev/null; then
