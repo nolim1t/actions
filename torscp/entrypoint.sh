@@ -52,34 +52,6 @@ echo "Wait about 20 seconds for TOR to bootstrap"
 sleep 20
 
 
-check_connection() {
-  if nc -vz localhost 9050 2>/dev/null; then
-      ONLINE=0
-  else
-      ONLINE=1
-  fi
-}
-
-ONLINE=1
-COUNT=0
-
-# Check tor connection for 30 seconds
-while [[ $ONLINE -eq 1 ]] && [ $COUNT -lt 60 ]
-do
-    echo "Checking tor connection"
-    check_connection
-    COUNT=$((COUNT + 1))
-    sleep 1
-done
-
-
-# Lets copy this
-if [[ $ONLINE == 0 ]]; then
-  echo "We are online; lets start the SCP stuff"
-  # do SCP
-  scp -v -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
-  exit 0
-else
-  echo "Can't connect to tor after 60 seconds"
-  exit 1
-fi
+# do SCP
+echo "Copying files via SCP"
+scp -v -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
