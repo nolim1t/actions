@@ -17,6 +17,7 @@ echo "Log debug file /var/log/tor/debug.log" >> /etc/tor/torrc
 echo "DataDirectory /var/lib/tor" >> /etc/tor/torrc
 echo "ControlPort 9051" >> /etc/tor/torrc
 echo "CookieAuthentication 1" >> /etc/tor/torrc
+echo "RunAsDaemon 1" >> /etc/tor/torrc
 
 
 /usr/bin/tor -f /etc/tor/torrc --runasdaemon 1 || echo "Tor failed to start?!"
