@@ -61,6 +61,7 @@ check_connection() {
 ONLINE=1
 COUNT=0
 
+nc -vz localhost 9050
 scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
 
 # Check tor connection for 30 seconds
