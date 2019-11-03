@@ -67,4 +67,4 @@ sleep 20
 
 # do SCP
 echo "Copying files via SCP"
-scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
+scp -v -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
