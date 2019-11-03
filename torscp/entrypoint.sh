@@ -28,14 +28,6 @@ chmod 700 /var/lib/tor
 echo "Attempting to start TOR"
 /usr/bin/tor -f /etc/tor/torrc --runasdaemon 1 || echo "Tor failed to start?!"
 
-#if [[ -f /etc/init.d/tor ]]; then
-#  echo "Starting TOR"
-#  /etc/init.d/tor start
-#else
-#  echo "TOR init.d not found!"
-#  exit 1
-#fi
-
 
 SSH_PATH="$HOME/.ssh"
 
@@ -71,24 +63,23 @@ check_connection() {
 ONLINE=1
 COUNT=0
 
-nc -vz localhost 9050
-scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
-
 # Check tor connection for 30 seconds
-#while [[ $ONLINE -eq 1 ]] && [ $COUNT -lt 60 ]
-#do
-#    echo "Checking tor connection"
-#    check_connection
-#    COUNT=$((COUNT + 1))
-#    sleep 1
-#done
+while [[ $ONLINE -eq 1 ]] && [ $COUNT -lt 60 ]
+do
+    echo "Checking tor connection"
+    check_connection
+    COUNT=$((COUNT + 1))
+    sleep 1
+done
+
 
 # Lets copy this
-#if [[ $ONLINE == 0 ]]; then
-#  echo "We are online; lets start the SCP stuff"
-#  scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -r $SRC $DEST
-#  exit 0
-#else
-#  echo "Can't connect to tor after 60 seconds"
-#  exit 1
-#fi
+if [[ $ONLINE == 0 ]]; then
+  echo "We are online; lets start the SCP stuff"
+  # do SCP
+  scp -v -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
+  exit 0
+else
+  echo "Can't connect to tor after 60 seconds"
+  exit 1
+fi
