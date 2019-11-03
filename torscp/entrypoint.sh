@@ -4,7 +4,19 @@
 
 set -e
 
-/etc/init.d/tor start
+# Try to install TOR again (wtf)
+apk add tor
+# Try to install netcat again
+apk add netcat-openbsd
+
+if [[ -f /etc/init.d/tor ]]; then
+  /etc/init.d/tor start
+  echo "Starting TOR"
+else
+  echo "Failed to start tor"
+  return 1
+fi
+
 
 SSH_PATH="$HOME/.ssh"
 
