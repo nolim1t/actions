@@ -23,9 +23,6 @@ LABEL "com.github.actions.description"="Deploy a directory to SCP over TOR"
 LABEL "com.github.actions.icon"="server"
 LABEL "com.github.actions.color"="orange"
 
-RUN mkdir -p /etc/init.d
-COPY run /etc/init.d/tor
-
 RUN apk update \
   && apk add openssh bash netcat-openbsd tor openrc
 
