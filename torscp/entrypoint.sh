@@ -18,9 +18,6 @@ echo "DataDirectory /var/lib/tor" >> /etc/tor/torrc
 echo "ControlPort 9051" >> /etc/tor/torrc
 echo "CookieAuthentication 1" >> /etc/tor/torrc
 
-id
-chown root.root -R /var/lib/tor
-chmod 700 /var/lib/tor
 
 /usr/bin/tor -f /etc/tor/torrc --runasdaemon 0 || echo "Tor failed to start?!"
 
