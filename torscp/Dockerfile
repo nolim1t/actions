@@ -13,10 +13,6 @@ RUN apt-get update && apt-get install -y \
     openssh-client bash netcat tor && \
     rm -Rf /var/lib/apt/lists/*
 
-RUN which nc
-RUN which netcat
-RUN ls /usr/bin/
-
 ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
