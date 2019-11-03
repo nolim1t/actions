@@ -19,7 +19,7 @@ echo "ControlPort 9051" >> /etc/tor/torrc
 echo "CookieAuthentication 1" >> /etc/tor/torrc
 
 
-/usr/bin/tor -f /etc/tor/torrc --runasdaemon 0 || echo "Tor failed to start?!"
+/usr/bin/tor -f /etc/tor/torrc --runasdaemon 1 || echo "Tor failed to start?!"
 
 #if [[ -f /etc/init.d/tor ]]; then
 #  echo "Starting TOR"
