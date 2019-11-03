@@ -38,6 +38,7 @@ chmod 700 /var/lib/tor
 
 
 echo "Attempting to start TOR"
+# Run from CLI
 /usr/bin/tor -f /etc/tor/torrc --runasdaemon 1 || echo "Tor failed to start?!"
 
 
