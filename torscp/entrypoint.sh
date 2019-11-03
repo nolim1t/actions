@@ -18,18 +18,13 @@ echo "DataDirectory /var/lib/tor" >> /etc/tor/torrc
 echo "ControlPort 9051" >> /etc/tor/torrc
 echo "CookieAuthentication 1" >> /etc/tor/torrc
 
-echo "Listing init.d contents"
-ls /etc/init.d/
-echo "List sshd contents"
-cat /etc/init.d/sshd
-
-if [[ -f /etc/init.d/tor ]]; then
-  echo "Starting TOR"
-  /etc/init.d/tor start
-else
-  echo "TOR init.d not found!"
-  exit 1
-fi
+#if [[ -f /etc/init.d/tor ]]; then
+#  echo "Starting TOR"
+#  /etc/init.d/tor start
+#else
+#  echo "TOR init.d not found!"
+#  exit 1
+#fi
 
 
 SSH_PATH="$HOME/.ssh"
