@@ -16,6 +16,7 @@ echo "DataDirectory /var/lib/tor" >> /etc/tor/torrc
 echo "ControlPort 9051" >> /etc/tor/torrc
 echo "CookieAuthentication 1" >> /etc/tor/torrc
 
+echo "Listing init.d contents"
 ls /etc/init.d/
 
 if [[ -f /etc/init.d/tor ]]; then
