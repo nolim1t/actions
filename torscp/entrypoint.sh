@@ -11,6 +11,7 @@ apk add netcat-openbsd
 # try to install openrc again
 apk add openrc
 
+echo "Configuring TOR"
 mkdir -p /etc/tor
 echo "SOCKSPort 9050" > /etc/tor/torrc
 echo "Log debug file /var/log/tor/debug.log" >> /etc/tor/torrc
@@ -19,7 +20,12 @@ echo "ControlPort 9051" >> /etc/tor/torrc
 echo "CookieAuthentication 1" >> /etc/tor/torrc
 echo "RunAsDaemon 1" >> /etc/tor/torrc
 
+echo "Setting permissions for TOR directory"
+chown -R root.root /var/lib/tor
+chmod 700 /var/lib/tor
 
+
+echp "Attempting to start TOR"
 /usr/bin/tor -f /etc/tor/torrc --runasdaemon 1 || echo "Tor failed to start?!"
 
 #if [[ -f /etc/init.d/tor ]]; then
