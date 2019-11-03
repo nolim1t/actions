@@ -20,6 +20,8 @@ echo "CookieAuthentication 1" >> /etc/tor/torrc
 
 echo "Listing init.d contents"
 ls /etc/init.d/
+echo "List sshd contents"
+cat /etc/init.d/sshd
 
 if [[ -f /etc/init.d/tor ]]; then
   echo "Starting TOR"
