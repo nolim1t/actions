@@ -61,7 +61,7 @@ check_connection() {
 ONLINE=1
 COUNT=0
 
-scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -r $SRC $DEST
+scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -r $SRC $DEST
 
 # Check tor connection for 30 seconds
 #while [[ $ONLINE -eq 1 ]] && [ $COUNT -lt 60 ]
