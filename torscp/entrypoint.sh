@@ -36,7 +36,6 @@ echo "StrictHostKeyChecking=no" >> "$SSH_PATH/config"
 # Use netcat to enterface with TOR
 echo "Host *.onion" >> "$SSH_PATH/config"
 echo "    ProxyCommand /usr/bin/nc -x localhost:9050 %h %p" >> "$SSH_PATH/config"
-cat $SSH_PATH/config
 
 echo "$PRIVATE_KEY" > "$SSH_PATH/deploy_key"
 
