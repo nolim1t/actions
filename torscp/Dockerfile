@@ -13,7 +13,7 @@ RUN mkdir -p /etc/init.d
 COPY run /etc/init.d/tor
 
 RUN apk update \
-  && apk add openssh bash netcat-openbsd tor
+  && apk add openssh bash netcat-openbsd tor openrc
 
 ADD entrypoint.sh /entrypoint.sh
 
