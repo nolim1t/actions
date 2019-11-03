@@ -38,7 +38,7 @@ jobs:
         env:
           GITHUB: true
         name: Run Rakefile
-      - uses: nolim1t/actions/torscp@master
+      - uses: nolim1t/actions/torscp@0.1.1
         name: Deploy to TOR over SCP
         env:
           SRC: _site
