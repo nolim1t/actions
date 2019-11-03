@@ -74,8 +74,8 @@ done
 if [[ $ONLINE == 0 ]]; then
   echo "We are online; lets start the SCP stuff"
   scp -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -r $SRC $DEST
-  return 0
+  exit 0
 else
   echo "Can't connect to tor after 60 seconds"
-  return 1
+  exit 1
 fi
