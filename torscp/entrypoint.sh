@@ -25,7 +25,7 @@ chown -R root.root /var/lib/tor
 chmod 700 /var/lib/tor
 
 
-echp "Attempting to start TOR"
+echo "Attempting to start TOR"
 /usr/bin/tor -f /etc/tor/torrc --runasdaemon 1 || echo "Tor failed to start?!"
 
 #if [[ -f /etc/init.d/tor ]]; then
