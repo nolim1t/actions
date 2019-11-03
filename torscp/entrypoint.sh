@@ -11,13 +11,19 @@ apk add netcat-openbsd
 
 mkdir -p /etc/tor
 echo "SOCKSPort 9050" > /etc/tor/torrc
-echo "Log debug file /var/log/tor/debug.log" >> /etc/torrc
-echo "DataDirectory /var/lib/tor" >> /etc/torrc
-echo "ControlPort 9051" >> /etc/torrc
-echo "CookieAuthentication 1" >> /etc/torrc
+echo "Log debug file /var/log/tor/debug.log" >> /etc/tor/torrc
+echo "DataDirectory /var/lib/tor" >> /etc/tor/torrc
+echo "ControlPort 9051" >> /etc/tor/torrc
+echo "CookieAuthentication 1" >> /etc/tor/torrc
+
+cat /etc/tor/torrc
 
 if [[ -f /etc/init.d/tor ]]; then
+  echo "Starting TOR"
   /etc/init.d/tor start
+else
+  echo "TOR init.d not found!"
+  exit 1
 fi
 
 
