@@ -6,4 +6,4 @@ If you have any issues, feel free to report them [here](https://github.com/nolim
 
 ## Action List
 
-* [***torscp***](https://github.com/nolim1t/actions/tree/master/torscp) - Action Name: ***nolim1t/actions/torscp@master***  (takes 3 variables: PRIVATE_KEY, SRC, DEST)
+* [***torscp***](https://github.com/nolim1t/actions/tree/master/torscp) - Action Name: ***nolim1t/actions/torscp@0.1.1***  (takes 3 variables: PRIVATE_KEY, SRC, DEST)
