@@ -1,0 +1,15 @@
+name: Test SSH Command out every X minutes on master
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run SSH
+        uses: nolim1t/actions/torssh@master
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          USERHOST: ${{ secrets.USERHOST }}
+          CMD: uname -a
