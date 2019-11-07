@@ -67,5 +67,5 @@ sleep 20
 
 # do SSH 
 echo "Executing command: ${CMD}"
-ssh -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" $USERHOST $CMD
+ssh -v -o "ProxyCommand nc -x localhost:9050 %h %p" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" $USERHOST $CMD
 
