@@ -1,4 +1,4 @@
-name: Check that nlcnxuehxfppi5y4.onion is online every 30 mins using the torssh action
+name: Check that nlcnx*i5y4.onion is online every 30 mins using the torssh action
 on:
   schedule:
     - cron: '*/30 * * * *'
@@ -12,13 +12,13 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USERHOST: ${{ secrets.USERHOST }}
-          CMD: "date > nlcnxuehxfppi5y4-date-output.txt"
-      - name: Add nlcnxuehxfppi5y4-date-output.txt to github
-        run: git add lcnxuehxfppi5y4-date-output.txt
+          CMD: "date > nlcnx-i5y4-date-output.txt"
+      - name: Add nlcnx-i5y4-date-output.txt to github
+        run: git add nlcnx-i5y4-date-output.txt
       - name: Set up git config
         run: git config --global user.email "nolim1t@users.noreply.github.com" && git config --global user.name "nolim1t
-      - name: Commit lcnxuehxfppi5y4-date-output.txt to this repo
-        run: git commit --allow-empty -m "Add output of date from nlcnxuehxfppi5y4.onion"
+      - name: Commit nlcnx-i5y4-date-output.txt to this repo
+        run: git commit --allow-empty -m "Add output of date from nlcnx*i5y4.onion"
       - name: Update host key for github
         run: mkdir -p ~/.ssh && echo "${PRIVATE_KEY}" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519 && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
         env:
