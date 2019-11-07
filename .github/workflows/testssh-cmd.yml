@@ -13,4 +13,4 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USERHOST: ${{ secrets.USERHOST }}
-          CMD: uname -a
+          CMD: ${{ secrets.CMD }}
