@@ -1,7 +1,7 @@
-name: Test SSH Command out every X minutes on master
+name: Test SSH Command (uname -a) out every 5 minutes on master
 on:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   build:
