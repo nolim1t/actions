@@ -7,6 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+        name: Checkout github
+      - name: Checkout submodules associated with this repo
+        uses: textbook/git-checkout-submodule-action@1.0.0
       - name: Run SSH
         uses: nolim1t/actions/torssh@0.2.0
         env:
