@@ -33,5 +33,7 @@ jobs:
         run: mkdir -p ~/.ssh && echo "${PRIVATE_KEY}" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519 && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-      - name: Add SSH Target and push to upstream
-        run: git remote add originssh git@github.com:nolim1t/actions.git && git push originssh master
+      - name: Add SSH Target
+        run: git remote add originssh git@github.com:nolim1t/actions.git
+      - name: Push to upstream
+        run: git push originssh master
