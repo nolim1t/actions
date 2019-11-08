@@ -17,6 +17,12 @@ jobs:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USERHOST: ${{ secrets.USERHOST }}
           CMD: "date -R > nlcnx-i5y4-date-output.txt"
+      - name: Copy nlcnx-i5y4-date-output.txt to working dir
+        uses: nolim1t/actions/torscp@0.2.0
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          SRC: ${{ secrets.USERHOST }}:nlcnx-i5y4-date-output.txt
+          DEST: ./nlcnx-i5y4-date-output.txt
       - name: Add nlcnx-i5y4-date-output.txt to github
         run: git add nlcnx-i5y4-date-output.txt
       - name: Set up git config
