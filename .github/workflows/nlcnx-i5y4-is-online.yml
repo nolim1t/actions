@@ -16,7 +16,7 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           USERHOST: ${{ secrets.USERHOST }}
-          CMD: "date > nlcnx-i5y4-date-output.txt"
+          CMD: "date -R > nlcnx-i5y4-date-output.txt"
       - name: Add nlcnx-i5y4-date-output.txt to github
         run: git add nlcnx-i5y4-date-output.txt
       - name: Set up git config
