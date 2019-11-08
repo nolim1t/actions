@@ -1,7 +1,7 @@
-name: Check that nlcnx*i5y4.onion is online every 30 mins using the torssh action
+name: Check that nlcnx*i5y4.onion is online every HOUR using the torssh action
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 */1 * * *'
 
 jobs:
   build:
