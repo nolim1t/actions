@@ -35,5 +35,9 @@ jobs:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       - name: Add SSH Target
         run: git remote add originssh git@github.com:nolim1t/actions.git
-      - name: Push to upstream
-        run: git push originssh master
+      - name: Check Branch status before pushing
+        run: git status
+      - name: Do LS
+        run: ls
+      - name: Check git config
+        run: cat .git/config
