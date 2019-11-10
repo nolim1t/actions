@@ -11,6 +11,8 @@ jobs:
         name: Checkout github
       - name: Checkout submodules associated with this repo
         uses: textbook/git-checkout-submodule-action@1.0.0
+      - name: Checkout MASTER (Ensure master is checked out)
+        run: git checkout master        
       - name: Run SSH
         uses: nolim1t/actions/torssh@0.2.0
         env:
@@ -25,6 +27,8 @@ jobs:
           DEST: ./nlcnx-i5y4-date-output.txt
       - name: Add nlcnx-i5y4-date-output.txt to github
         run: git add nlcnx-i5y4-date-output.txt
+      - name: Grab branch status
+        run: git status        
       - name: Set up git config
         run: git config --global user.email "nolim1t@users.noreply.github.com" && git config --global user.name "@nolim1t"
       - name: Commit nlcnx-i5y4-date-output.txt to this repo
