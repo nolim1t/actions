@@ -1,4 +1,4 @@
-name: Test SSH Command on push
+name: Test SSH Command (to 2ma67*w4xl.onion) on push
 on:
   push:
     branches:
